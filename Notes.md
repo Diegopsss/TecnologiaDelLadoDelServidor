@@ -293,3 +293,6 @@ Run with: `node server.js`
 - ✅ A well-modularized monolith is a valid solution
 - ✅ The server should never blindly trust client-provided data
 - ✅ Documentation and reproducibility are part of professional work
+
+
+## Class -2:

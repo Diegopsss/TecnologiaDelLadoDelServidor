@@ -1,17 +1,30 @@
-
 const http = require('node:http');
-const server = http.createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'application/json; charset=utf-8');
 
-    res.end(JSON.stringify({
-        message: 'Hola desde Node.js',
-        method: req.method,
-        url: req.url
-    }))
-})
+const server = http.createServer((request, response) => {
+    const mockResponses = {
+        GET: 'Mock GET response',
+        POST: 'Mock POST response',
+        PUT: 'Mock PUT response',
+        PATCH: 'Mock PATCH response',
+        DELETE: 'Mock DELETE response'
+    };
 
-server.listen(3000, '127.0.0.1', () => {
-    console.log('servidor escuchando en : http://127.0.0.1:3000 ');
+    const message = mockResponses[request.method];
+
+    if (request.method && request.url === '/mock') {
+        console.log('Mock GET response');
+    }
+
+    response.statusCode = message ? 200 : 405;
+    response.setHeader('Content-Type', 'application/json; charset=utf-8');
+
+    response.end(JSON.stringify({
+        message: message ?? 'Method not allowed',
+        method: request.method,
+        url: request.url
+    }));
 });
 
+server.listen(3000, '127.0.0.1', () => {
+    console.log('Servidor en http://127.0.0.1:3000');
+});
