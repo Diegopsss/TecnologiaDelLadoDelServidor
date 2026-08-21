@@ -40,3 +40,14 @@ app.get('/api/search', (request, response) => {
         limit: request.query.limit
     });
 });
+
+app.get('/api/items/:event_series_id',(request, response) => {
+    response.json({
+        message: 'Mock GET response',
+        method: request.method,
+        query: request.query,
+        page: request.query.page,
+        limit: request.query.limit
+    })
+}
+
